@@ -19,6 +19,7 @@ fswatch_exclude = ['jb_tmp', 'jb_old', r'\.idea', r'\.git', r'\.pyc$']
 fswatch_args = ['fswatch', '--print0', '--latency=1'] + ['--exclude=%s' % x for x in fswatch_exclude]
 rsync_args = ['rsync', '-avz', '--files-from=/dev/stdin']
 
+# Start watching FS events.
 fswatch = subprocess.Popen(fswatch_args + [source_dir], stdout=subprocess.PIPE)
 fcntl.fcntl(fswatch.stdout.fileno(), fcntl.F_SETFL, os.O_NONBLOCK)
 print('Watching directory %s' % source_dir)
@@ -26,7 +27,7 @@ print('Watching directory %s' % source_dir)
 # This is endless script.
 while True:
     # Wait the next chunk in fswatch stdout.
-    readable, _, _ = select.select([fswatch.stdout.fileno()], [], [])
+    select.select([fswatch.stdout.fileno()], [], [])
 
     # Next chunk ready to read.
     data = fswatch.stdout.read()
