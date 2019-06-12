@@ -11,6 +11,11 @@
 2. Next it reads the changes chunk (buffered for 1 second).
 3. Finally it uploads this files via rsync.
 
+## Requirements
+* Python 2.7 on MacOS or Linux
+* Rsync
+* [FSWatch](https://github.com/emcrisostomo/fswatch) (Homebrew's is OK)
+
 ## Example
 
 ```sh
