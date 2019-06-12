@@ -7,7 +7,7 @@
 
 ## How this tool works
 
-1. It listen for FS events via fswatch.
+1. It listens for FS events via fswatch.
 2. Next it reads the changes chunk (buffered for 1 second).
 3. Finally it uploads this files via rsync.
 
